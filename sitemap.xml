@@ -4,4 +4,28 @@
          <loc>https://mydomain.org/mysite/</loc>
          <lastmod>2025-07-19</lastmod>
     </url>
+    <url>
+         <loc>https://mydomain.org/mysite/blog/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/arranging/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/notes/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/profile/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/summary/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/test/</loc>
+         <lastmod>2025-07-19</lastmod>
+    </url>
 </urlset>
