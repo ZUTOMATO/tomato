@@ -54,7 +54,23 @@ nav:
   - 主页: index.md
   - 关于我: md/profile.md
   - 我的课程总结:
-    -  md/summary.md
+      - 统计学/数学:
+        - 数学分析: md/note/math/数学分析.md
+        - 高等代数与解析几何: md/note/math/高等代数与解析几何.md
+        - 概率论: md/note/math/概率论.md
+        - 实变函数: md/note/math/实变函数.md
+        - 数理统计: md/note/math/数理统计.md
+        - 随机过程: md/note/math/随机过程.md
+        - 常微分方程: md/note/math/常微分方程.md
+      - 化学:
+        - 无机化学: md/note/chemistry/无机化学.md
+        - 有机化学1: md/note/chemistry/有机化学1.md
+        - 有机化学2: md/note/chemistry/有机化学2.md  
+        - 分析化学1: md/note/chemistry/分析化学1.md
+        - 分析化学2: md/note/chemistry/分析化学2.md
+        - 结构与谱学1（现已改为结构化学1）: md/note/chemistry/结构与谱学.md
+        - 普通化学实验: md/note/chemistry/普通化学实验.md
   - 我的课程笔记:
-    -  md/notes.md
-  - 我的编曲/混音笔记: md/arranging.md
+    - md/notes.md
+  - 我的编曲/混音日记:
+    - md/arranging.md
