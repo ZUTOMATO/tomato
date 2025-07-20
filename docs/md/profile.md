@@ -822,6 +822,31 @@
                     </div>
                 </div>
             </div>        
+        <!-- ✅ 独立的新红色卡片 -->
+                <div class="three-cards-section">
+            <h2 class="section-title">
+            <div class="logo">
+                <img src="https://s21.ax1x.com/2025/07/20/pV83CPs.png"  width="120">
+            </div>
+            </h2>
+        <div style="max-width: 320px; margin: 24px auto;">
+            <div class="custom-card card-blue">
+                <div class="card-top">
+                    <div class="card-icon">
+                            <div class="logo">
+                                <img src="https://s21.ax1x.com/2025/07/19/pV3XuZ9.png" width="120">
+                            </div>
+                        </div>
+            <h3 class="card-title">zutomato</h3>
+            <p class="card-subtitle">CC98</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-actions">
+                <a href="http://www-cc98-org-s.webvpn.zju.edu.cn:8001/usercenter" class="card-btn" target="_blank">CC98主页</a>
+                        </div>
+                </div>
+            </div>
+        </div>
         <!-- 页脚 -->
         <div class="footer">
             <p>© ZUTOMATO 2025</p>
