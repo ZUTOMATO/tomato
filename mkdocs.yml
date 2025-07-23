@@ -1,71 +1,41 @@
-# =============== 站点基本信息 ===============
+# 1. 站点信息
 site_name: ZUTOMATO
 site_url: https://mydomain.org/mysite
 
-# =============== 主题配置 ===============
+# 2. 主题
 theme:
   name: material
+  features:
+    - content.math.mathjax   # 关键：打开 Material 内置 MathJax
   palette:
     - scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-      primary: deep purple
-      accent: blue
     - scheme: slate
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-      primary: deep purple
-      accent: blue
-
   language: zh
   logo: https://s21.ax1x.com/2025/07/19/pV3XuZ9.png
   favicon: https://s21.ax1x.com/2025/07/19/pV3XuZ9.png
 
-  features:
-    - announce.dismiss
-    - navigation.instant
-    - header.autohide
-    - navigation.tracking
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.top
-    - navigation.footer
-    - search.suggest
-    - search.highlight
-    - search.share
-    - navigation.expand
-    - navigation.indexes
-    - content.tabs.link
-    - content.tooltips
-    - content.code.copy
-    - content.action.edit
-    - content.action.view
-    - content.code.annotate
-
-  icon:
-    repo: fontawesome/brands/github
-    logo: logo
-
-# =============== 插件 ===============
+# 3. 插件
 plugins:
   - search
   - blog
 
-# =============== Markdown 扩展（新增） ===============
+# 4. Markdown 扩展
 markdown_extensions:
-  - pymdownx.arithmatex:   # 识别 $...$ / $$...$$
-      generic: true
+  - pymdownx.arithmatex:
+      generic: false   # 让 $ ... $ 直接生效
 
-# =============== 静态资源（新增） ===============
+# 5. 国内 CDN（避免被墙）
 extra_javascript:
-  # 使用 MathJax（Material 推荐 CDN，国内可换别的源）
   - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
 
-# =============== 导航 ===============
+# 6. 导航
 nav:
   - 主页: index.md
   - 关于我: md/profile.md
