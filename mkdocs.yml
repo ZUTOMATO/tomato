@@ -28,7 +28,7 @@ plugins:
 # 4. Markdown 扩展
 markdown_extensions:
   - pymdownx.arithmatex:
-      generic: false   # 让 $ ... $ 直接生效
+      generic: true   # 让 $ ... $ 直接生效
 
 # 5. 国内 CDN（避免被墙）
 extra_javascript:
