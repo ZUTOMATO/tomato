@@ -87,4 +87,6 @@ nav:
           - 结构与谱学1（现已改为结构化学1）: md/note/chemistry/结构与谱学.md
           - 普通化学实验: md/note/chemistry/普通化学实验.md
   - 我的课程笔记: md/notes.md
-  - 我的编曲/混音日记: md/arranging.md
+  - 编曲/混音: 
+    - 瞎写的一些东西: md/music/demo.md
+    - 混音: md/music/混音.md
