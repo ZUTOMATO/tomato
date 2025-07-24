@@ -2,86 +2,94 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mydomain.org/mysite/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/blog/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/arranging/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/notes/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/profile/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/summary/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/test/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/music/demo/</loc>
+         <lastmod>2025-07-24</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/md/music/%E6%B7%B7%E9%9F%B3/</loc>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E5%88%86%E6%9E%90%E5%8C%96%E5%AD%A61/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E5%88%86%E6%9E%90%E5%8C%96%E5%AD%A62/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E6%97%A0%E6%9C%BA%E5%8C%96%E5%AD%A6/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E6%99%AE%E9%80%9A%E5%8C%96%E5%AD%A6%E5%AE%9E%E9%AA%8C/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E6%9C%89%E6%9C%BA%E5%8C%96%E5%AD%A61/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E6%9C%89%E6%9C%BA%E5%8C%96%E5%AD%A62/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/chemistry/%E7%BB%93%E6%9E%84%E4%B8%8E%E8%B0%B1%E5%AD%A6/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E5%AE%9E%E5%8F%98%E5%87%BD%E6%95%B0/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E6%A6%82%E7%8E%87%E8%AE%BA/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/md/note/math/%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E4%B8%8E%E8%A7%A3%E6%9E%90%E5%87%A0%E4%BD%95/</loc>
-         <lastmod>2025-07-23</lastmod>
+         <lastmod>2025-07-24</lastmod>
     </url>
 </urlset>
