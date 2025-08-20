@@ -92,7 +92,8 @@ nav:
   - 我的课程笔记:
       - 计算机:
           - python:
-              - chap1-4: md/PY1.ipynb
+              - chap 1-4: md/PY1.ipynb
+              - chap 5-8: md/PY2.ipynb
   - 编曲/混音: 
     - 瞎写的一些东西: md/music/demo.md
     - 混音: md/music/混音.md
