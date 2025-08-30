@@ -94,6 +94,7 @@ nav:
           - python:
               - chap 1-4: md/PY1.ipynb
               - chap 5-8: md/PY2.ipynb
+              - Numpy: md/numpy1.ipynb
   - 编曲/混音: 
     - 瞎写的一些东西: md/music/demo.md
     - 混音: md/music/混音.md
