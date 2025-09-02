@@ -96,6 +96,7 @@ nav:
               - chap 5-8: md/PY2.ipynb
               - Numpy: md/numpy1.ipynb
               - pandas: md/pandas1.ipynb
+              - 数据分析: md/daanpy.ipynb
   - 编曲/混音: 
     - 瞎写的一些东西: md/music/demo.md
     - 混音: md/music/混音.md
