@@ -1,4 +1,0 @@
-
-```sql
-SHOW DATABASES;
-```
