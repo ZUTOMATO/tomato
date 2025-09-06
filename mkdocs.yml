@@ -96,8 +96,6 @@ nav:
               - chap 5-8: md/PY2.ipynb
               - Numpy: md/numpy1.ipynb
               - pandas: md/pandas1.ipynb
-              - jieba: md/jieba.ipynb
-              - turtle: md/turtle.ipynb
               - 数据载入、存储及文件格式: md/daanpy.ipynb
               - 数据清洗与准备: md/daanpy2.ipynb
   - 编曲/混音: 
