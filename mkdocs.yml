@@ -98,6 +98,7 @@ nav:
               - pandas: md/pandas1.ipynb
               - 数据载入、存储及文件格式: md/daanpy.ipynb
               - 数据清洗与准备: md/daanpy2.ipynb
+              - 数据规整：连接、联合与重塑: md/daanpy3.ipynb
   - 编曲/混音: 
     - 瞎写的一些东西: md/music/demo.md
     - 混音: md/music/混音.md
