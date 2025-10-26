@@ -1,0 +1,2149 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/md/note/math/shijianxulie/">
+      
+      
+        <link rel="prev" href="../../chemistry/%E6%99%AE%E9%80%9A%E5%8C%96%E5%AD%A6%E5%AE%9E%E9%AA%8C/">
+      
+      
+        <link rel="next" href="../duoyuan/">
+      
+      
+      <link rel="icon" href="https://s21.ax1x.com/2025/07/19/pV3XuZ9.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>时间序列分析 - ZUTOMATO</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="ZUTOMATO" class="md-header__button md-logo" aria-label="ZUTOMATO" data-md-component="logo">
+      
+  <img src="https://s21.ax1x.com/2025/07/19/pV3XuZ9.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ZUTOMATO
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              时间序列分析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../profile/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  关于我
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  我的课程总结
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  我的课程笔记
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../music/demo/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  编曲/混音
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="ZUTOMATO" class="md-nav__button md-logo" aria-label="ZUTOMATO" data-md-component="logo">
+      
+  <img src="https://s21.ax1x.com/2025/07/19/pV3XuZ9.png" alt="logo">
+
+    </a>
+    ZUTOMATO
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    主页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    关于我
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    我的课程总结
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            我的课程总结
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    统计学/数学
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            统计学/数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%A6%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数学分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%AB%98%E7%AD%89%E4%BB%A3%E6%95%B0%E4%B8%8E%E8%A7%A3%E6%9E%90%E5%87%A0%E4%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    高等代数与解析几何
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%A6%82%E7%8E%87%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    概率论
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%AE%9E%E5%8F%98%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实变函数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数理统计
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    随机过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常微分方程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    化学
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            化学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E6%97%A0%E6%9C%BA%E5%8C%96%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    无机化学
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E6%9C%89%E6%9C%BA%E5%8C%96%E5%AD%A61/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    有机化学1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E6%9C%89%E6%9C%BA%E5%8C%96%E5%AD%A62/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    有机化学2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E5%88%86%E6%9E%90%E5%8C%96%E5%AD%A61/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分析化学1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E5%88%86%E6%9E%90%E5%8C%96%E5%AD%A62/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分析化学2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E7%BB%93%E6%9E%84%E4%B8%8E%E8%B0%B1%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    结构与谱学1（现已改为结构化学1）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chemistry/%E6%99%AE%E9%80%9A%E5%8C%96%E5%AD%A6%E5%AE%9E%E9%AA%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    普通化学实验
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    我的课程笔记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            我的课程笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    时间序列分析
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    时间序列分析
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      平稳序列
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性平稳序列和线性滤波
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线性平稳序列和线性滤波">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      有限运动平均：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性平稳序列
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      时间序列的线性滤波
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      严平稳序列及其遍历性
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      谱函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="谱函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性滤波输出的平稳序列的谱密度和谱函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(Hilbert\)空间中的平稳序列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="\(Hilbert\)空间中的平稳序列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      内积的连续性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一章总结：
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duoyuan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多元统计分析
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算机
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            计算机
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3_1" id="__nav_4_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    python
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PY1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    chap 1-4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PY2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    chap 5-8
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../numpy1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Numpy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pandas1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pandas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../daanpy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据载入、存储及文件格式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../daanpy2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据清洗与准备
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../daanpy3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据规整：连接、联合与重塑
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    绘图与可视化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    编曲/混音
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            编曲/混音
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../music/demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    瞎写的一些东西
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../music/%E6%B7%B7%E9%9F%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    混音
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      平稳序列
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性平稳序列和线性滤波
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线性平稳序列和线性滤波">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      有限运动平均：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性平稳序列
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      时间序列的线性滤波
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      严平稳序列及其遍历性
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      谱函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="谱函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性滤波输出的平稳序列的谱密度和谱函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(Hilbert\)空间中的平稳序列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="\(Hilbert\)空间中的平稳序列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      内积的连续性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一章总结：
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>时间序列分析</p>
+<h1 id="_1">时间序列</h1>
+<h2 id="_2">平稳序列</h2>
+<p><span class="arithmatex">\(Def\)</span>
+时间序列$\left{X_t\right}  = \left{ X_t|t\in \mathbb{N}\right} $满足：
+- <span class="arithmatex">\(\forall t \in \mathbb{N}有EX_t^2 &lt; \infty\)</span>.
+- <span class="arithmatex">\(\forall t \in \mathbb{N}有EX_t = \mu\)</span>.
+- <span class="arithmatex">\(\forall t,s \in \mathbb{N}有E\left[\left(X_t-\mu \right)\left(X_s-\mu \right) \right]  = \gamma_{t-s}\)</span>.
+即：均值函数为常数且自协方差函数只与时间差有关的二阶矩时间序列为<strong>平稳时间序列</strong>，也称<strong>平稳序列</strong>.</p>
+<p>自协方差函数的性质：
+- 对称性：<span class="arithmatex">\(\gamma _k = \gamma _{-k},~\forall k \in \mathbb{Z}\)</span>
+- 非负定性：自协方差矩阵为
+$$
+\Gamma <em>n = (\gamma</em>{k-j})^n_{k,j=1} = \begin{bmatrix}
+\gamma <em>0  &amp;\gamma _1  &amp; \cdots &amp;\gamma </em>{n-1} \
+\gamma <em>1  &amp;\gamma _0  &amp; \cdots &amp;\gamma </em>{n-1} \
+\vdots  &amp;\vdots  &amp; \ddots &amp;\vdots \
+\gamma <em>{n-1}  &amp;\gamma </em>{n-2}  &amp; \cdots &amp;\gamma _0 \
+\end{bmatrix}是非负定矩阵.
+$$
+- 有界性：<span class="arithmatex">\(\left\lvert \gamma _k\right\rvert\leqslant \left\lvert \gamma _0\right\rvert,~\forall k \in \mathbb{Z}\)</span>.</p>
+<p>即：平稳序列是非负定序列.</p>
+<p><span class="arithmatex">\(Lemma\)</span>
+内积不等式：
+<span class="arithmatex">\(EX^2&lt;\infty,~EY^2&lt;\infty\)</span>则有
+$$
+\left\lvert E(XY)\right\rvert \leqslant \sqrt{(EX^2)(EY^2)},
+<span class="arithmatex">\(<span class="arithmatex">\(当且仅当有不全为零的常数\)</span>a,b\)</span>使得
+$$
+aX+bY=0,\quad a.s.
+$$时等号成立.
+这个不等式是概率意义下的柯西-施瓦茨不等式.</p>
+<p><span class="arithmatex">\(Def\)</span>
+自相关系数：<span class="arithmatex">\(\rho _k = \frac{\gamma _k}{\gamma _0},\quad k \in \mathbb{Z}\)</span></p>
+<p><span class="arithmatex">\(Def\)</span>
+白噪声：自协方差函数满足<span class="arithmatex">\(Cov(\epsilon_t,\epsilon_s) =
+\begin{cases}
+   \sigma^2, &amp;  t = s, \\
+   0, &amp; t \neq s.
+\end{cases}\)</span>
+记号：<span class="arithmatex">\(WN(\mu , \sigma^2)\)</span>.
+独立序列：独立白噪声 <span class="arithmatex">\(\quad\mu = 0\)</span>：零均值白噪声 <span class="arithmatex">\(\quad WN(0 , 1)\)</span>：标准白噪声<span class="arithmatex">\(\quad\)</span>服从正态分布的独立白噪声：正态白噪声.</p>
+<p><span class="arithmatex">\(Def\)</span>
+正交平稳序列：
+<span class="arithmatex">\(\forall s,t \in \mathbb{Z},E(X_tY_s) = 0\)</span>则两序列正交;
+若协方差函数恒为<span class="arithmatex">\(0\)</span>则两序列不相关.
+对于期望为<span class="arithmatex">\(0\)</span>的平稳序列不相关和正交等价.</p>
+<p><span class="arithmatex">\(Them\)</span>
+- 正交的平稳序列的和的自协方差函数：
+$$
+\gamma_Z(k) = \gamma_X(k) + \gamma_Y(k) - 2\mu_X\mu_Y
+$$
+- 不相关的平稳序列的和的自协方差函数：
+$$
+\gamma_Z(k) = \gamma_X(k) + \gamma_Y(k)
+$$</p>
+<h2 id="_3">线性平稳序列和线性滤波</h2>
+<h3 id="_4">有限运动平均：</h3>
+<p><span class="arithmatex">\(Def\)</span>
+白噪声的有限项线性组合是白噪声的（<strong>有限</strong>）<strong>运动平均</strong>，也称<strong>滑动平均</strong>，有均值函数：<span class="arithmatex">\(\mu = EX_t = \sum_{j=0}^{q} a_jE\epsilon_{t-j} = 0,\quad t\in \mathbb{Z}\)</span>.
+自协方差函数：<span class="arithmatex">\(\gamma _{t-s} = E(X_tX_s) = \sum_{j=0}^{q}\sum_{k=0}^{q} a_ka_jE(\epsilon_{t-k}\epsilon_{s-j}) = \begin{cases}
+   \sigma^2\sum_{j=0}^{q-(t-s)}a_ja_{j+t-s}, &amp;  0\leqslant t-s \leqslant  q, \\
+   0, &amp; t-s &gt; q.
+\end{cases}\)</span>
+即<span class="arithmatex">\(\gamma _{k} =  \begin{cases}
+   \sigma^2\sum_{j=0}^{q-k}a_ja_{j+k}, &amp;  0\leqslant k \leqslant  q, \\
+   0, &amp; k &gt; q.
+\end{cases}\)</span></p>
+<h3 id="_5">线性平稳序列</h3>
+<p><span class="arithmatex">\(Def\)</span>
+$\sum_{j=-\infty}^{\infty}\left\lvert a_j\right\rvert&lt;\infty <span class="arithmatex">\(则称\)</span>\left{a_j\right} $绝对可和.
+<span class="arithmatex">\(\left\{\epsilon _t\right\} <span class="arithmatex">\(的无穷滑动：\)</span>X_t=\sum_{j=-\infty}^{\infty}a_j\epsilon _{t-j},\quad t \in \mathbb{Z}\)</span></p>
+<p><span class="arithmatex">\(Them\)</span>
+若系数绝对可和则零均值白噪声的无穷滑动为平稳序列.
+<span class="arithmatex">\(Prof\)</span>
+单调收敛定理、内积不等式：
+$$
+E\left(\sum_{j=-\infty}^{\infty}|a_j\epsilon_{t-j}|\right) = \sum_{j=-\infty}^{\infty}|a_j|E|\epsilon_{t-j}|\leqslant \sigma \sum_{j=-\infty}^{\infty}|a_j| &lt; \infty
+$$
+由<span class="arithmatex">\(\left\lvert \sum_{j=-n}^{n}a_j\epsilon_{t-j}\right\rvert \leqslant \sum_{j=-\infty}^{\infty}|a_j\epsilon_{t-j}|\)</span>以及控制收敛定理
+$$
+EX_t = \lim_{n \to \infty}E\left(\sum_{j=-n}^{n}a_j\epsilon <em>{t-j}\right) = 0<br />
+<span class="arithmatex">(<span class="arithmatex">\(现令\)</span>\xi _n =  \sum_{j=-n}^{n}a_j\epsilon _{t-j}, \quad \eta _n = \sum_{k=-n}^{n}a_k\epsilon _{s-k}\)</span>则<span class="arithmatex">\(\xi _n \eta _n\rightarrow X_tX_s, ~a.s.\)</span>且$\left\lvert \xi _n \eta _n\right\rvert \leqslant \sum</em>{j=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}\left\lvert a_ja_k\epsilon <em>{t-j}\epsilon </em>{s-k}\right\rvert = V $
+由单调收敛定理
+$$
+EV = E\left(\sum_{j=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}\left\lvert a_ja_k\epsilon <em>{t-j}\epsilon </em>{s-k}\right\rvert\right) = \sum_{j=-\infty}^{\infty}\sum_{k=-\infty}^{\infty}\left\lvert a_ja_k\right\rvert E\left\lvert\epsilon <em>{t-j}\epsilon </em>{s-k}\right\rvert \leqslant \sigma ^2 \left(\sum_{j=-\infty}^{\infty}|a_j|\right)^2  &lt; \infty
+$$
+则由控制收敛定理得
+$$
+E(X_tX_s) = \lim_{n \to \infty}  E(\xi <em>n \eta _n)=\lim</em>{n \to \infty}E\left(\sum_{j=-n}^{n}a_j\epsilon <em>{t-j}\sum</em>{k=-n}^{n}a_k\epsilon <em>{s-k}\right) = \sigma^2\sum</em>{j=-\infty}^{\infty}a_ja_{j+t-s}$$
+则可知<span class="arithmatex">\(\{X_t\}\)</span>为平稳序列，且可得到自协方差函数<span class="arithmatex">\(\gamma _k=\sigma^2 \sum_{j=-\infty}^{\infty}a_ja_{j+k},~k \in \mathbb{Z}.\)</span>
+我们可以接着得到：<span class="arithmatex">\(\lim_{n \to \infty}\gamma _k = 0.\)</span>这里可以由柯西不等式得：$\sigma ^2\sum_{|j|\leqslant k/2}|a_ja_{j+k}|\leqslant \sigma ^2\left(\sum_{j=-\infty}^{\infty}a_j^2\sum <em>{j\leqslant k/2}a</em>{j+k}^2\right)^{1/2} $
+然后可证明上式.</p>
+<h3 id="_6">时间序列的线性滤波</h3>
+<p>考虑线性滤波：<span class="arithmatex">\(Y_t=\sum_{j=-\infty}^{\infty}h_jX_{t-j},~t \in \mathbb{Z}.\)</span>
+可以参照上面的证明过程证明若<span class="arithmatex">\(\{X_t\}\)</span>是平稳序列且<span class="arithmatex">\(\{h_j\}\)</span>绝对可和（保时线性滤波）那么其线性滤波也是平稳序列.其期望为<span class="arithmatex">\(\mu _Y = \mu _X\sum_{j=-\infty}^{\infty}h_j\)</span>，自协方差函数<span class="arithmatex">\(\gamma _Y(k) = \sum_{j,k=-\infty}^{\infty}h_jh_k\gamma _X(n+k-j)\)</span></p>
+<h2 id="_7">严平稳序列及其遍历性</h2>
+<p>定义<strong>严平稳序列</strong>：若<span class="arithmatex">\(\forall n,k \in \mathbb{N}\)</span>有
+$$
+(X_1,X_2,\cdots , X_n)^T \overset{d}{\thicksim} (X_{1+t},X_{2+t},\cdots , X_{n+t})^T
+<span class="arithmatex">\(<span class="arithmatex">\(则\)</span>\{X_t\}\)</span>为严平稳序列.</p>
+<p><span class="arithmatex">\(Them\)</span></p>
+<ul>
+<li>遍历定理：若遍历严平稳序列的绝对值期望存在即<span class="arithmatex">\(E|X_1|&lt;\infty\)</span>有$$\lim_{n \to \infty} \frac{1}{n}\sum_{t=1}^{\infty}X_t = EX_1,\quad a.s. $$.</li>
+<li>若系数平方可和则线性平稳序列严平稳遍历.</li>
+</ul>
+<h2 id="_8">谱函数</h2>
+<p><span class="arithmatex">\(Def\)</span>
+谱密度函数：<span class="arithmatex">\(\gamma _k = \int_{-\pi}^{\pi}f(\lambda)e^{ik\lambda}  \,d\lambda , ~ k \in \mathbb{Z}\)</span>则非负函数<span class="arithmatex">\(f(\lambda)\)</span>为<strong>谱密度函数</strong>，由<span class="arithmatex">\(Heglotz\)</span>定理可以知道，平稳序列的谱函数是唯一存在的，也就是在几乎处处的意义下，谱密度和平稳序列一一对应.</p>
+<p><span class="arithmatex">\(Them\)</span>
+<strong><span class="arithmatex">\(\{\epsilon _t\}\)</span>是<span class="arithmatex">\(WN(0,~\sigma^2)\)</span>，<span class="arithmatex">\(\{a_j\}\)</span>绝对可和则<span class="arithmatex">\(\{X_t=\sum_{j=-\infty}^{\infty}a_j\epsilon _{t-j}\}\)</span>的谱密度为$f(\lambda) = \frac{\sigma^2}{2\pi}\left\lvert \sum_{j=-\infty}^{\infty} a_j e^{ij\lambda}\right\rvert^2 $</strong></p>
+<p>证明如下：设<span class="arithmatex">\(Y\thicksim U[-\pi, \pi]\)</span>则令<span class="arithmatex">\(\eta _n = e^{inY}\)</span>有<span class="arithmatex">\(E\eta_n = \delta_n,\quad E(\eta _n\overline{\eta_m} ) = \frac{1}{2\pi}\int_{-\pi}^{\pi}e^{i(n-m)y}  \,dy = \delta _{m-n}\)</span>，令<span class="arithmatex">\(Z_n = \sum_{j=-\infty}^{\infty}a_j\eta _{n-j} = \sum_{j=-\infty}^{\infty}a_j e^{i(n-j)Y}\)</span>
+由内积的连续性可得$EZ_n = a_n,\quad E(Z_n\overline{Z_m}) = \sum_{j=-\infty}^{\infty}a_ja_{j+n-m} = E\left(\sum_{j=-\infty}^{\infty}a_je^{i(n-j)Y}\sum_{k=-\infty}^{\infty}a_ke^{-i(m-k)Y}\right) = \frac{1}{2\pi}\int_{-\pi}^{\pi}\left(\sum_{j=-\infty}^{\infty}a_je^{i(n-j)y}\right) \left(\sum_{k=-\infty}^{\infty}a_ke^{-i(m-k)y}\right)   \,dy = \frac{1}{2\pi}\int_{-\pi}^{\pi}\left\lvert \sum_{j=-\infty}^{\infty}a_je^{-ijy}\right\rvert^2e^{i(n-m)y}   \,dy $
+令$k = m - n <span class="arithmatex">\(则可得\)</span>\sigma^2\sum_{j=-\infty}^{\infty}a_ja_{j+k} = \int_{-\pi}^{\pi} \frac{\sigma^2}{2\pi}\left\lvert \sum_{j=-\infty}^{\infty}a_je^{ij\lambda}\right\rvert^2 e^{ik\lambda} \,d\lambda $</p>
+<p><span class="arithmatex">\(Them\)</span>
+有两互相正交的零期望平稳序列，<span class="arithmatex">\(c\)</span>为常数，令<span class="arithmatex">\(<span class="arithmatex">\(Z_t = X_t + Y_t + c\)</span>\)</span>
+则
+- 谱函数<span class="arithmatex">\(F_Z = F_X + F_Y\)</span>
+- 谱密度<span class="arithmatex">\(f_Z = f_X + f_Y\)</span>
+证明可由上面的定理得到.</p>
+<h3 id="_9">线性滤波输出的平稳序列的谱密度和谱函数</h3>
+<p>由上面定义的线性滤波：
+首先<span class="arithmatex">\(<span class="arithmatex">\(\gamma_Y(k) = \sum_{l,j=-\infty}^{\infty}h_lh_j\gamma_{k+l-j}\)</span>\)</span>
+则由<span class="arithmatex">\(<span class="arithmatex">\(\sum_{l,j=-\infty}^{\infty}\left\lvert h_lh_j\right\rvert =\left(\sum_{j=-\infty}^{\infty}\left\lvert h_j\right\rvert \right)^2 &lt; \infty\)</span>\)</span>
+由控制收敛定理
+<span class="arithmatex">\(<span class="arithmatex">\(\gamma_Y(k) = \sum_{l,j=-\infty}^{\infty}h_lh_j\int_{-\pi}^{\pi} exp[i(k+l-j)\lambda] \,dF_X(\lambda) \\ =\int_{-\pi}^{\pi}\sum_{l,j=-\infty}^{\infty}h_lh_j exp[i(l-j)\lambda]e^{ik\lambda} \,dF_X(\lambda)\\=\int_{-\pi}^{\pi}\left\lvert \sum_{j=-\infty}^{\infty}h_j exp(-ij\lambda) \right\rvert^2 e^{ik\lambda} \,dF_X(\lambda)\\=\int_{-\pi}^{\pi}\left\lvert H(e^{-i\lambda}) \right\rvert^2 e^{ik\lambda} \,dF_X(\lambda)\)</span>\)</span>
+其中<span class="arithmatex">\(H(z)=\sum_{j=-\infty}^{\infty}h_j z^{j}\)</span>则
+<span class="arithmatex">\(Them\)</span>
+谱函数为
+<strong><span class="arithmatex">(<span class="arithmatex">\(F_Y(\lambda) = \int_{-\pi}^{\pi}\left\lvert H(e^{-i\lambda}) \right\rvert^2 \,dF_X(\lambda)\)</span>\)</span></strong>
+谱密度为
+<strong><span class="arithmatex">(<span class="arithmatex">\(f_Y(\lambda) = \left\lvert H(e^{-i\lambda})\right\rvert^2 f_x(\lambda)\)</span>\)</span></strong>
+<span class="arithmatex">\(Them\)</span>
+实值平稳序列的谱密度为偶函数.</p>
+<h2 id="hilbert"><span class="arithmatex">\(Hilbert\)</span>空间中的平稳序列</h2>
+<p><span class="arithmatex">\(Def\)</span>
+完备的内积空间称为<span class="arithmatex">\(Hilbert\)</span>空间</p>
+<p>对于平稳序列<span class="arithmatex">\(\{X_t\}\)</span>，<span class="arithmatex">\(L^2(X)\)</span>表示其中随机变量有限线性组合的全体：
+$$L^2(X) = \left{\sum_{j=1}^ka_jX(t_j)|a_j \in \mathbb{R},t_j \in \mathbb{Z},1\leqslant j\leqslant k,k \in \mathbb{N_+}\right} $$
+定义内积$\left\langle X,Y \right\rangle = E(XY) $
+可证明<span class="arithmatex">\(L^2(X)\)</span>为一个内积空间，进一步可以证明在均方收敛意义下的柯西收敛定理成立，则这是一个<span class="arithmatex">\(Hilbert\)</span>空间</p>
+<h3 id="_10">内积的连续性</h3>
+<p><span class="arithmatex">\(Them\)</span>
+在内积空间中若<span class="arithmatex">\(n\rightarrow \infty\)</span>时<span class="arithmatex">\(\left\lVert \xi _n - \xi\right\rVert \rightarrow 0,\left\lVert \eta _n - \eta\right\rVert \rightarrow 0\)</span>则有
+- <span class="arithmatex">\(\left\lVert \xi _n\right\rVert \rightarrow \left\lVert \xi \right\rVert ,n\rightarrow\infty\)</span>
+- <span class="arithmatex">\(\left\langle \xi_n,\eta_n\right\rangle \rightarrow \left\langle \xi,\eta\right\rangle\)</span>
+可由三角不等式和内积不等式证明.</p>
+<p>现在我们可以证明当<span class="arithmatex">\(\{a_j\}\)</span>平方可和时<span class="arithmatex">\(X_t = \sum_{j=-\infty}^{\infty}a_j\epsilon_{t-j}\)</span>是平稳序列且<span class="arithmatex">\(EX_t=0,\gamma_k=\sigma^2\sum_{j=-\infty}^{\infty}a_ja_{j+k1
+}\)</span>
+部分和序列<span class="arithmatex">\(\xi_n = \sum_{j=-n}^{n}a_j\epsilon_{t-j}\)</span>
+则可以证明这个序列是柯西序列，则有<span class="arithmatex">\(\xi_n\rightarrow X_t\)</span>
+由内积连续性<span class="arithmatex">\(<span class="arithmatex">\(EX_t = \lim_{n \to \infty} \left\langle \xi_n,1\right\rangle = \lim_{n \to \infty} E\xi_n = 0 , \\ \gamma_k = E(X_tX_{t+K}) \\ =\lim_{n \to \infty}\left\langle \sum_{j=-n}^{n}a_j\epsilon_{t-j},\sum_{j=-n}^{n}a_j\epsilon_{t+k-j}\right\rangle \\ = \lim_{n \to \infty}E\left(\sum_{j=-n}^{n}a_j\epsilon_{t-j},\sum_{j=-n}^{n}a_j\epsilon_{t+k-j}\right) \\ = \sigma^2\sum_{j=-\infty}^{\infty}a_ja_{j+k
+}.\)</span>\)</span></p>
+<h2 id="_11">第一章总结：</h2>
+<p>重点：
+- 平稳序列的定义和正交平稳序列的性质
+- 滑动平均和无穷滑动（包括平稳性的证明，绝对可和、平方可和的情况）
+- 线性滤波
+- 谱函数、谱密度以及无穷滑动和线性滤波的谱密度</p>
+<p>证明无穷滑动是平稳序列的重点是：用有限滑动来逼近无穷滑动，工具是单调收敛定理、控制收敛定理以及<span class="arithmatex">\(Hilbert\)</span>空间里的内积连续性.</p>
+<h1 id="_12">自回归模型</h1>
+<h2 id="_13">推移算子和差分方程</h2>
+<p><span class="arithmatex">\(Def\)</span>
+<span class="arithmatex">\(\psi (z) = \sum _{j=-\infty}^{\infty}b_jz^j\)</span>则<span class="arithmatex">\(\psi (\mathcal{B} )X_t = \sum _{j=-\infty}^{\infty}b_jX_{t-j}\)</span></p>
+<p><span class="arithmatex">\(Def\)</span>
+<span class="arithmatex">\(\{a_n\}\)</span>为实数列则称
+<span class="arithmatex">\(<span class="arithmatex">\(X_t - \sum_{j = 1}^{p}a_jX_{t-j} = 0\)</span>\)</span>即<span class="arithmatex">\(<span class="arithmatex">\(A(\mathcal{B} )X_t = 0\)</span>\)</span>
+为<span class="arithmatex">\(p\)</span><strong>阶齐次常系数线性差分方程</strong>，简称为<strong>齐次差分方程</strong>.
+可以由<span class="arithmatex">\(p\)</span>个初值唯一决定.
+把<span class="arithmatex">\(A(z) = 1 -  \sum _{j=-\infty}^{\infty}a_jz^j\)</span>称为其特征多项式.</p>
+<p><span class="arithmatex">\(Them\)</span>
+设<span class="arithmatex">\(A(z) = 0\)</span>有<span class="arithmatex">\(k\)</span>个互异根<span class="arithmatex">\(\{z_j\}\)</span>，且<span class="arithmatex">\(z_j\)</span>是<span class="arithmatex">\(r(j)\)</span>重根则
+<span class="arithmatex">\(<span class="arithmatex">\(\{z_j^{-t}t^l\}, \quad l = 0,1,\cdots ,r(j)-1,~j = 1,2,\cdots ,k\)</span>\)</span>是差分方程的<span class="arithmatex">\(p\)</span>个解且通解为
+<span class="arithmatex">\(<span class="arithmatex">\(X_t = \sum _{j=1}^k\sum_{l=0}^{r(j)-1}U_{l,j}t^lz_j^{-t}\)</span>\)</span>其中<span class="arithmatex">\(U\)</span>为被初值决定的随机变量.若写成
+<span class="arithmatex">\(<span class="arithmatex">\(U_{l,j} = V_{l,j}e^{i\theta _{l,j}}, \quad z_j = \rho _je^{i\lambda _j}\)</span>\)</span>
+则实值通解可以表示为<span class="arithmatex">\(<span class="arithmatex">\(X_t = \sum _{j=1}^k\sum_{l=0}^{r(j)-1}V_{l,j}t^l\rho ^{-t}\cos(\lambda_jt-\theta_{l,j})\)</span>\)</span></p>
+<p>非齐次：找特解，通解 = 特解 + 齐次通解.</p>
+<h2 id="arp"><span class="arithmatex">\(AR(p)\)</span>模型</h2>
+<p><span class="arithmatex">\(Def\)</span>
+<span class="arithmatex">\({\epsilon_t}\)</span>为<span class="arithmatex">\(WN(0\sigma^2)\)</span>且<span class="arithmatex">\(A(z) = 0\)</span>的根都在单位圆外.其中<span class="arithmatex">\(A(z) = 1 -  \sum _{j=-\infty}^{\infty}a_jz^j\)</span>即$$A(z) = 1 -  \sum _{j=-\infty}^{\infty}a_jz^j \neq 0,~\left\lvert z\right\rvert \leqslant 1 $$
+则称<span class="arithmatex">\(p\)</span>阶差分方程<span class="arithmatex">\(<span class="arithmatex">\(A(\mathcal{B} )X_t = \epsilon_t\)</span>\)</span>为<span class="arithmatex">\(p\)</span>阶自回归模型即<span class="arithmatex">\(AR(p)\)</span>模型.满足上式的平稳序列为<strong>平稳解</strong>即<span class="arithmatex">\(\bm{AR(p)}\)</span><strong>序列</strong>，<span class="arithmatex">\(\{a_j\}\)</span>为模型的自回归系数，根在单位圆外的条件是稳定性条件或最小相位条件.</p>
+<h3 id="arp_1">解<span class="arithmatex">\(AR(p)\)</span>模型</h3>
+<p>可由<span class="arithmatex">\(X_t=A^{-1}(\mathcal{B} ) \epsilon_t= \sum_{j=0}^\infty \psi _j \epsilon_{t-j}\)</span>求得模型的特解（平稳解），再由上面的定理求得齐次差分方程的通解，最后得到模型的通解.
+这里<span class="arithmatex">\(\{\psi _j\}\)</span>被称为<span class="arithmatex">\(Wold\)</span>系数
+<span class="arithmatex">\(Wold\)</span>系数可由<span class="arithmatex">\(Taylor\)</span>公式求得，也可以由递推公式求得.</p>
+<h2 id="aryule-walker"><span class="arithmatex">\(AR\)</span>序列的谱密度和<span class="arithmatex">\(Yule-Walker\)</span>方程</h2>
+<p>利用线性平稳序列的谱密度公式：
+<span class="arithmatex">\(<span class="arithmatex">\(f_X(\lambda) = \frac{\sigma^2}{2\pi}\left\lvert \sum_{j=-\infty}^{\infty}\psi_je^{ij\lambda}\right\rvert^2 = \frac{\sigma^2}{2\pi\left\lvert A(e^{i\lambda})\right\rvert^2 }\)</span>\)</span></p>
+<p><span class="arithmatex">\(Them\)</span>
+若平稳序列的自协方差函数绝对可和则有
+<span class="arithmatex">\(<span class="arithmatex">\(f_X(\lambda) = \frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\gamma_k e^{-ik\lambda}\)</span>\)</span>
+由于谱密度是实值函数，则还可以写成
+<span class="arithmatex">\(<span class="arithmatex">\(f_X(\lambda) = \frac{1}{2\pi}\left[\gamma_0 + 2\sum_{k=1}^{\infty}\gamma_k \cos(k\lambda)\right]\)</span>\)</span></p>
+<p><strong>推论</strong></p>
+<p>对于<span class="arithmatex">\(AR(p)\)</span>模型，有
+<span class="arithmatex">\(<span class="arithmatex">\(f_X(\lambda) = \frac{1}{2\pi}\sum_{k=-\infty}^{\infty}\gamma_k e^{-k\lambda} = \frac{\sigma^2}{2\pi\left\lvert A(e^{i\lambda})\right\rvert^2 }\)</span>\)</span>
+这里我们可以得到自协方差函数和特征多项式的关系.</p>
+<h3 id="yule-walker"><span class="arithmatex">\(Yule-Walker\)</span>方程</h3>
+<p>通过在模型等式两边同时乘上<span class="arithmatex">\(X_{t+k}\)</span>然后取期望，我们可以得到一系列式子：
+$$\gamma_k - \sum_{j=1}^pa_j\gamma_{k-j} = 0, \quad k \geqslant 1 \ \gamma_0 - \sum_{j=1}^pa_j\gamma_{-j} = \sigma^2 $$
+这组方程称为<span class="arithmatex">\(Yule-Walker\)</span>方程.当然我们也可以用矩阵形式表示：
+<span class="arithmatex">\(<span class="arithmatex">\(\begin{bmatrix}
+\gamma_0  &amp;\gamma_1  &amp; \cdots &amp;\gamma _{n-1} \\
+\gamma_1  &amp;\gamma_0  &amp; \cdots &amp;\gamma _{n-2} \\
+\vdots  &amp;\vdots  &amp; \ddots &amp;\vdots \\
+\gamma _ {n-1}  &amp;\gamma _{n-2}  &amp; \cdots &amp;\gamma _0 \\
+\end{bmatrix}
+\begin{bmatrix}
+a_1 \\
+a_2 \\
+\vdots \\
+a_n \\
+\end{bmatrix} =
+\begin{bmatrix}
+\gamma_1 \\
+\gamma_2 \\
+\vdots \\
+\gamma_n \\
+\end{bmatrix}\)</span>\)</span>其中我们定义自协方差矩阵
+<span class="arithmatex">\(<span class="arithmatex">\(\Gamma _n = \begin{bmatrix}
+\gamma_0  &amp;\gamma_1  &amp; \cdots &amp;\gamma _{n-1} \\
+\gamma_1  &amp;\gamma_0  &amp; \cdots &amp;\gamma _{n-2} \\
+\vdots  &amp;\vdots  &amp; \ddots &amp;\vdots \\
+\gamma _ {n-1}  &amp;\gamma _{n-2}  &amp; \cdots &amp;\gamma _0 \\
+\end{bmatrix}\)</span>\)</span>此外<span class="arithmatex">\(<span class="arithmatex">\(\bm{a_n} = \begin{bmatrix}
+a_1 &amp;
+a_2 &amp;
+\cdots &amp;
+a_n &amp;
+\end{bmatrix}^T \\  \bm{\gamma_n} = \begin{bmatrix}
+\gamma_1 &amp;
+\gamma_2 &amp;
+\cdots &amp;
+\gamma_n &amp;
+\end{bmatrix}^T\)</span>\)</span>
+则可改写为：
+<span class="arithmatex">\(<span class="arithmatex">\(\Gamma _n \bm{a_n} = \bm{\gamma_n}\\ \gamma_0 = \Gamma _n^T \bm{a_n} + \sigma ^2 , \quad n \geqslant p\)</span>\)</span></p>
+<p>我们有如下<span class="arithmatex">\(Yule-Walker\)</span>方程的推论：
+<span class="arithmatex">\(<span class="arithmatex">\(\gamma_k - (a_1\gamma_{k-1}+a_2\gamma_{k-2}+\cdots +a_p\gamma_{k-p}) = \sigma^2\psi_{-k}\)</span>\)</span></p>
+<h4 id="_14">自协方差函数的正定性：</h4>
+<p><span class="arithmatex">\(Them\)</span></p>
+<p>平稳序列的协方差矩阵正定的充分条件：</p>
+<ul>
+<li>若序列的谱密度存在则<span class="arithmatex">\(\forall n\geqslant 1,~\Gamma_n\)</span>正定</li>
+<li>若<span class="arithmatex">\(\lim_{k\to\infty}\gamma_k = 0\)</span>则<span class="arithmatex">\(\forall n\geqslant 1,~\Gamma_n\)</span>正定</li>
+</ul>
+<p>证明：
+- 对于<span class="arithmatex">\(\bm{b} = (b_1,b_2,\cdots ,b_n)^T = \bm{0}\)</span>，<span class="arithmatex">\(\lambda\)</span>的函数<span class="arithmatex">\(\sum_{k=1}^nb_ke^{ik\lambda}\)</span>最多只有<span class="arithmatex">\(n-1\)</span>个零点.由于$\gamma_0 = \int_{-\pi}^{\pi} f(\lambda) \,d\lambda &gt;0 $则
+<span class="arithmatex">\(<span class="arithmatex">\(\bm{b^T\Gamma_nb} = \sum_{j=1}^n\sum_{k=1}^nb_k\gamma_{k-j}b_j\\= \sum_{j=1}^n\sum_{k=1}^n\int_{-\pi}^{\pi}  b_kb_jf(\lambda)e^{i(k-j)\lambda} \,d\lambda \\ = \int_{-\pi}^{\pi} \left\lvert \sum_{k=1}^n b_ke^{ik\lambda}\right\rvert^2 f(\lambda) \,d\lambda &gt;0\)</span>\)</span></p>
+<p><strong>推论</strong></p>
+<p>线性平稳序列的自协方差矩阵总是正定的.</p>
+<h3 id="_15">偏相关系数</h3>
+<p><span class="arithmatex">\(Def\)</span>
+对于一般的平稳序列，称<span class="arithmatex">\(\bm{\Gamma _n a_n= \gamma_n} <span class="arithmatex">\(为协方差函数的\)</span>n\)</span>阶<span class="arithmatex">\(Yule-Walker\)</span>方程，其中<span class="arithmatex">\(\bm{a_n} = (a_{n,1},a_{n,2},\cdots,a_{n,n})^T\)</span>称为协方差函数的<span class="arithmatex">\(n\)</span>阶<span class="arithmatex">\(Yule-Walker\)</span>系数.当<span class="arithmatex">\(\bm{\Gamma_n}\)</span>正定时<span class="arithmatex">\(\bm{a_n}\)</span>由<span class="arithmatex">\(\bm{\gamma_n}\)</span>唯一决定.</p>
+<p><span class="arithmatex">\(Them\)</span></p>
+<p>若<span class="arithmatex">\(\bm{\Gamma_{n+1}}\)</span>正定则<span class="arithmatex">\(<span class="arithmatex">\(1-\sum_{j=1}^na_{n,j}z^j \neq 0,\quad |z| \leqslant 1.\)</span>\)</span></p>
+<p><span class="arithmatex">\(Them\)</span></p>
+<p><span class="arithmatex">\(Levinson\)</span>递推公式详见课本.</p>
+<p><span class="arithmatex">\(Def\)</span></p>
+<p>若<span class="arithmatex">\(\bm{\Gamma_{n+1}}\)</span>正定则称<span class="arithmatex">\(a_{n,n}\)</span>为时间序列或自协方差函数的<span class="arithmatex">\(n\)</span>阶<strong>偏相关系数</strong>.</p>
+<p>对于<span class="arithmatex">\(AR(p)\)</span>序列：偏相关系数和自回归系数的关系满足：
+<span class="arithmatex">\(<span class="arithmatex">\(a _k = a_{k,k} ,\quad k = 1,2,\cdots ,p\)</span>\)</span>
+且是<span class="arithmatex">\(p\)</span>后截尾的即$$
+\forall n&gt;p,\quad a_{n,n} = 0
+$$
+其中<span class="arithmatex">\(a _k\)</span>为<span class="arithmatex">\(AR(p)\)</span>模型的自回归系数，<span class="arithmatex">\(a_{k,k}\)</span>为偏相关系数.</p>
+<p><span class="arithmatex">\(Them\)</span></p>
+<p><span class="arithmatex">\(AR\)</span>序列的充要条件：</p>
+<p>零均值平稳序列<span class="arithmatex">\(\{X_t\}\)</span>是<span class="arithmatex">\(AR(p)\)</span>序列的充要条件是它的偏相关系数在<span class="arithmatex">\(p\)</span>后截尾.（可由<span class="arithmatex">\(Levinson\)</span>递推公式证明）</p>
+<h2 id="_16">第二章总结</h2>
+<p>重点：
+- <span class="arithmatex">\(AR\)</span>模型、序列的定义和最小相位条件
+- 谱密度和<span class="arithmatex">\(Yule-Walker\)</span>方程
+- 自协方差函数、自相关系数、偏相关系数的求法</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../../chemistry/%E6%99%AE%E9%80%9A%E5%8C%96%E5%AD%A6%E5%AE%9E%E9%AA%8C/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 普通化学实验">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                普通化学实验
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../duoyuan/" class="md-footer__link md-footer__link--next" aria-label="下一页: 多元统计分析">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                多元统计分析
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["announce.dismiss", "navigation.instant", "header.autohide", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "search.share", "navigation.expand", "navigation.indexes", "content.tabs.link", "content.tooltips", "content.code.copy", "content.action.edit", "content.action.view", "content.code.annotate"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
