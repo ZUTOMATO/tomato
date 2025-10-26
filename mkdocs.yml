@@ -44,7 +44,7 @@ theme:
     - content.action.edit
     - content.action.view
     - content.code.annotate
-    - content.math.mathjax
+    # 移除 content.math.mathjax
 
   icon:
     repo: fontawesome/brands/github
@@ -66,7 +66,7 @@ markdown_extensions:
 # =============== 静态资源（新增） ===============
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://mirrors.pku.edu.cn/CTAN/systems/texlive/tlnet/2023/tlpkg/tlperl/tex-mml-chtml.min.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 # =============== 导航 ===============
 nav:
@@ -90,6 +90,8 @@ nav:
           - 结构与谱学1（现已改为结构化学1）: md/note/chemistry/结构与谱学.md
           - 普通化学实验: md/note/chemistry/普通化学实验.md
   - 我的课程笔记:
+      - 时间序列分析: md/note/math/shijianxulie.md
+      - 多元统计分析: md/note/math/duoyuan.md
       - 计算机:
           - python:
               - chap 1-4: md/PY1.ipynb

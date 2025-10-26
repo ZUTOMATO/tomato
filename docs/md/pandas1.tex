@@ -1,0 +1,1870 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Keep aspect ratio if custom image width or height is specified
+    \setkeys{Gin}{keepaspectratio}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8x]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{soul}      % strikethrough (\st) support for pandoc >= 3.0.0
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{pandas1}
+    
+    
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@ges}{\let\PY@bf=\textbf\let\PY@it=\textit}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{276}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{numpy}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{np}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux6570ux636eux7ed3ux6784}{%
+\subsection{数据结构}\label{ux6570ux636eux7ed3ux6784}}
+
+    \hypertarget{series}{%
+\subsubsection{Series}\label{series}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{277}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)} \PY{c+c1}{\PYZsh{}左边是索引，右边是值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{values}\PY{p}{)} \PY{c+c1}{\PYZsh{}值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{index}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引}
+
+\PY{n}{obj2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过索引取值}
+\PY{n}{obj2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{6} \PY{c+c1}{\PYZsh{}通过索引赋值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过索引列表取值}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0    4
+1    7
+2   -5
+3    3
+dtype: int64
+[ 4  7 -5  3]
+RangeIndex(start=0, stop=4, step=1)
+d    4
+b    7
+a   -5
+c    3
+dtype: int64
+Index(['d', 'b', 'a', 'c'], dtype='object')
+-5
+c    3
+a   -5
+d    6
+dtype: int64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{278}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{[}\PY{n}{obj2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}布尔型索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{}算术运算}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{obj2}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}numpy函数}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{obj2}\PY{p}{)} \PY{c+c1}{\PYZsh{}检查索引是否存在}
+
+\PY{n}{sdata} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{35000}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{71000}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oregon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{16000}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{5000}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{}字典创建Series}
+\PY{n}{obj3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{sdata}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d    6
+b    7
+c    3
+dtype: int64
+d    12
+b    14
+a   -10
+c     6
+dtype: int64
+d     403.428793
+b    1096.633158
+a       0.006738
+c      20.085537
+dtype: float64
+True
+Ohio      35000
+Texas     71000
+Oregon    16000
+Utah       5000
+dtype: int64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{279}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{states} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{California}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oregon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}指定索引创建Series}
+\PY{n}{obj4} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{sdata}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{states}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj4}\PY{p}{)} \PY{c+c1}{\PYZsh{}缺失值为NaN}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{obj4}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}检查缺失值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{n}{obj4}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}检查非缺失值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj3} \PY{o}{+} \PY{n}{obj4}\PY{p}{)} \PY{c+c1}{\PYZsh{}算术运算，索引对齐}
+
+\PY{n}{obj4}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{population}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{}设置name属性}
+\PY{n}{obj4}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{}设置index的name属性}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj4}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+California        NaN
+Ohio          35000.0
+Oregon        16000.0
+Texas         71000.0
+dtype: float64
+California     True
+Ohio          False
+Oregon        False
+Texas         False
+dtype: bool
+California    False
+Ohio           True
+Oregon         True
+Texas          True
+dtype: bool
+California         NaN
+Ohio           70000.0
+Oregon         32000.0
+Texas         142000.0
+Utah               NaN
+dtype: float64
+state
+California        NaN
+Ohio          35000.0
+Oregon        16000.0
+Texas         71000.0
+Name: population, dtype: float64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{280}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Steve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jeff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ryan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}修改索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Bob      4
+Steve    7
+Jeff    -5
+Ryan     3
+dtype: int64
+    \end{Verbatim}
+
+    \hypertarget{dataframe}{%
+\subsubsection{DataFrame}\label{dataframe}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{281}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+		\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2002}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{,} \PY{l+m+mi}{2002}\PY{p}{,} \PY{l+m+mi}{2003}\PY{p}{]}\PY{p}{,}
+		\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mf}{1.7}\PY{p}{,} \PY{l+m+mf}{3.6}\PY{p}{,} \PY{l+m+mf}{2.4}\PY{p}{,} \PY{l+m+mf}{2.9}\PY{p}{,} \PY{l+m+mf}{3.2}\PY{p}{]}\PY{p}{\PYZcb{}}
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{c+c1}{\PYZsh{}字典创建DataFrame}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}前五行}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}后3行}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+    state  year  pop
+0    Ohio  2000  1.5
+1    Ohio  2001  1.7
+2    Ohio  2002  3.6
+3  Nevada  2001  2.4
+4  Nevada  2002  2.9
+5  Nevada  2003  3.2
+    state  year  pop
+0    Ohio  2000  1.5
+1    Ohio  2001  1.7
+2    Ohio  2002  3.6
+3  Nevada  2001  2.4
+4  Nevada  2002  2.9
+    state  year  pop
+3  Nevada  2001  2.4
+4  Nevada  2002  2.9
+5  Nevada  2003  3.2
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{282}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}指定列顺序}
+\PY{n}{frame2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{four}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{five}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{six}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}指定列顺序和索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{}列名}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   year   state  pop
+0  2000    Ohio  1.5
+1  2001    Ohio  1.7
+2  2002    Ohio  3.6
+3  2001  Nevada  2.4
+4  2002  Nevada  2.9
+5  2003  Nevada  3.2
+       year   state  pop debt
+one    2000    Ohio  1.5  NaN
+two    2001    Ohio  1.7  NaN
+three  2002    Ohio  3.6  NaN
+four   2001  Nevada  2.4  NaN
+five   2002  Nevada  2.9  NaN
+six    2003  Nevada  3.2  NaN
+Index(['state', 'year', 'pop'], dtype='object')
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{283}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}取列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{o}{.}\PY{n}{year}\PY{p}{)} \PY{c+c1}{\PYZsh{}取列}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}按标签取行}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+one        Ohio
+two        Ohio
+three      Ohio
+four     Nevada
+five     Nevada
+six      Nevada
+Name: state, dtype: object
+one      2000
+two      2001
+three    2002
+four     2001
+five     2002
+six      2003
+Name: year, dtype: int64
+year     2002
+state    Ohio
+pop       3.6
+debt      NaN
+Name: three, dtype: object
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{284}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{16.5} \PY{c+c1}{\PYZsh{}赋值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+\PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{6.}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+       year   state  pop  debt
+one    2000    Ohio  1.5  16.5
+two    2001    Ohio  1.7  16.5
+three  2002    Ohio  3.6  16.5
+four   2001  Nevada  2.4  16.5
+five   2002  Nevada  2.9  16.5
+six    2003  Nevada  3.2  16.5
+       year   state  pop  debt
+one    2000    Ohio  1.5   0.0
+two    2001    Ohio  1.7   1.0
+three  2002    Ohio  3.6   2.0
+four   2001  Nevada  2.4   3.0
+five   2002  Nevada  2.9   4.0
+six    2003  Nevada  3.2   5.0
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{285}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{val} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.7}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{four}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{five}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{debt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{val} \PY{c+c1}{\PYZsh{}按索引赋值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+
+\PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eastern}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{frame2}\PY{o}{.}\PY{n}{state} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{}布尔型列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+\PY{k}{del} \PY{n}{frame2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{eastern}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}删除列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{}列名}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+       year   state  pop  debt
+one    2000    Ohio  1.5   NaN
+two    2001    Ohio  1.7  -1.2
+three  2002    Ohio  3.6   NaN
+four   2001  Nevada  2.4  -1.5
+five   2002  Nevada  2.9  -1.7
+six    2003  Nevada  3.2   NaN
+       year   state  pop  debt  eastern
+one    2000    Ohio  1.5   NaN     True
+two    2001    Ohio  1.7  -1.2     True
+three  2002    Ohio  3.6   NaN     True
+four   2001  Nevada  2.4  -1.5    False
+five   2002  Nevada  2.9  -1.7    False
+six    2003  Nevada  3.2   NaN    False
+Index(['year', 'state', 'pop', 'debt'], dtype='object')
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{286}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{pop} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+m+mi}{2001}\PY{p}{:} \PY{l+m+mf}{2.4}\PY{p}{,} \PY{l+m+mi}{2002}\PY{p}{:} \PY{l+m+mf}{2.9}\PY{p}{\PYZcb{}}\PY{p}{,}
+	   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+m+mi}{2000}\PY{p}{:} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{:} \PY{l+m+mf}{1.7}\PY{p}{,} \PY{l+m+mi}{2002}\PY{p}{:} \PY{l+m+mf}{3.6}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+\PY{n}{frame3} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pop}\PY{p}{)} \PY{c+c1}{\PYZsh{}嵌套字典创建DataFrame}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{o}{.}\PY{n}{T}\PY{p}{)} \PY{c+c1}{\PYZsh{}转置}
+
+\PY{n}{pdata} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{frame3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{frame3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nevada}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{}通过列创建DataFrame}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{pdata}\PY{p}{)}\PY{p}{)}
+
+\PY{n}{frame3}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{}设置index的name属性}
+\PY{n}{frame3}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{}设置columns的name属性}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{p}{)}
+
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{o}{.}\PY{n}{values}\PY{p}{)} \PY{c+c1}{\PYZsh{}二维ndarray}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{dtype}\PY{p}{)} \PY{c+c1}{\PYZsh{}值的类型}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{o}{.}\PY{n}{values}\PY{p}{)} \PY{c+c1}{\PYZsh{}二维ndarray，类型不同会转换成object}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{dtype}\PY{p}{)} \PY{c+c1}{\PYZsh{}值的类型}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      Nevada  Ohio
+2001     2.4   1.7
+2002     2.9   3.6
+2000     NaN   1.5
+        2001  2002  2000
+Nevada   2.4   2.9   NaN
+Ohio     1.7   3.6   1.5
+      Ohio  Nevada
+2001   1.7     2.4
+2002   3.6     2.9
+state  Nevada  Ohio
+year
+2001      2.4   1.7
+2002      2.9   3.6
+2000      NaN   1.5
+[[2.4 1.7]
+ [2.9 3.6]
+ [nan 1.5]]
+float64
+[[2000 'Ohio' 1.5 nan]
+ [2001 'Ohio' 1.7 -1.2]
+ [2002 'Ohio' 3.6 nan]
+ [2001 'Nevada' 2.4 -1.5]
+ [2002 'Nevada' 2.9 -1.7]
+ [2003 'Nevada' 3.2 nan]]
+object
+    \end{Verbatim}
+
+    DataFrame构造函数的有效输入可以有：
+
+\begin{itemize}
+\tightlist
+\item
+  2D ndarray：数据的矩阵，行和列的标签是可选参数
+\item
+  数组、列表和元组构成的字典：每个序列成为DataFrame的一列，所有序列必须长度相等
+\item
+  NumPy结构化/记录化数组：与数组构成的字典一致
+\item
+  Series构成的字典：每个值成为一列，每个Series的索引联合起来
+  形成结果的行索引，也可以显式地传递序列
+\item
+  字典构成的字典：每个内部字典成为一列，键联合起来形成结果的行索引
+\item
+  字典或Series构成的列表：列表中的一个元素形成DataFrame的一行，字典键或Series索引联合起来形成DataFrame的列标签
+\item
+  列表或元组构成的列表：与二维数组的情况一致
+\item
+  其他DataFrame：如果不显示传递索引，则会使用原DatraFrame的索引
+\item
+  NumPy MaskedArray：和二维数组的情况类似但隐藏制会在结果中成为缺失值
+\end{itemize}
+
+    \hypertarget{ux7d22ux5f15ux5bf9ux8c61}{%
+\subsubsection{索引对象}\label{ux7d22ux5f15ux5bf9ux8c61}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{287}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{index} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{index}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引切片}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}单个索引}
+\PY{c+c1}{\PYZsh{} index[1] = \PYZsq{}d\PYZsq{} \PYZsh{}索引不可修改，不变性更安全}
+\PY{n}{lables} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Index}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}创建Index对象}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{lables}\PY{p}{)}
+\PY{n}{obj2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{lables}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{o}{.}\PY{n}{index} \PY{o+ow}{is} \PY{n}{lables}\PY{p}{)} \PY{c+c1}{\PYZsh{}obj2的索引就是lables}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a    0
+b    1
+c    2
+dtype: int64
+Index(['a', 'b', 'c'], dtype='object')
+Index(['b', 'c'], dtype='object')
+b
+Index([0, 1, 2], dtype='int64')
+0    1.5
+1   -2.5
+2    0.0
+dtype: float64
+True
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{288}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{c+c1}{\PYZsh{}除了类似数组，索引对象也像一个固定大小的集合}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{frame3}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{}检查列名是否存在}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{2003} \PY{o+ow}{in} \PY{n}{frame3}\PY{o}{.}\PY{n}{index}\PY{p}{)} \PY{c+c1}{\PYZsh{}检查行索引是否存在}
+\PY{n}{dup\PYZus{}lables} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Index}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{foo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{foo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}重复索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{dup\PYZus{}lables}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+state  Nevada  Ohio
+year
+2001      2.4   1.7
+2002      2.9   3.6
+2000      NaN   1.5
+True
+False
+Index(['foo', 'foo', 'bar', 'bar'], dtype='object')
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{289}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{del} \PY{n}{obj}\PY{p}{,} \PY{n}{obj2}\PY{p}{,} \PY{n}{obj3}\PY{p}{,} \PY{n}{obj4}\PY{p}{,} \PY{n}{frame}\PY{p}{,} \PY{n}{frame2}\PY{p}{,} \PY{n}{frame3}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{sdata}\PY{p}{,} \PY{n}{states}\PY{p}{,} \PY{n}{pop}\PY{p}{,} \PY{n}{pdata}\PY{p}{,} \PY{n}{val}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{lables}\PY{p}{,} \PY{n}{dup\PYZus{}lables}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \hypertarget{ux57faux672cux529fux80fd}{%
+\subsection{基本功能}\label{ux57faux672cux529fux80fd}}
+
+    \hypertarget{ux91cdux5efaux7d22ux5f15}{%
+\subsubsection{重建索引}\label{ux91cdux5efaux7d22ux5f15}}
+
+    在Series中的reindex()函数：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{290}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{4.5}\PY{p}{,} \PY{l+m+mf}{7.2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.3}\PY{p}{,} \PY{l+m+mf}{3.6}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n}{obj2} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}重新索引，缺失值为NaN}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj2}\PY{p}{)}
+\PY{n}{obj3} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{}重新索引，缺失值填充0}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj3}\PY{p}{)}
+\PY{n}{obj4} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj4}\PY{p}{)}
+\PY{n}{obj4} \PY{o}{=} \PY{n}{obj4}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ffill}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}重新索引，前向填充}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj4}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d    4.5
+b    7.2
+a   -5.3
+c    3.6
+dtype: float64
+a   -5.3
+b    7.2
+c    3.6
+d    4.5
+e    NaN
+dtype: float64
+a   -5.3
+b    7.2
+c    3.6
+d    4.5
+e    0.0
+dtype: float64
+0      blue
+2    purple
+4    yellow
+dtype: object
+0      blue
+1      blue
+2    purple
+3    purple
+4    yellow
+5    yellow
+dtype: object
+    \end{Verbatim}
+
+    在DataFrame中：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{291}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{California}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n}{frame2} \PY{o}{=} \PY{n}{frame}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}重新索引行，缺失值为NaN}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame2}\PY{p}{)}
+\PY{n}{states} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texas}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{California}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n}{frame3} \PY{o}{=} \PY{n}{frame}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{states}\PY{p}{)} \PY{c+c1}{\PYZsh{}重新索引列，缺失值为NaN}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame3}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Ohio  Texas  California
+a     0      1           2
+c     3      4           5
+d     6      7           8
+   Ohio  Texas  California
+a   0.0    1.0         2.0
+b   NaN    NaN         NaN
+c   3.0    4.0         5.0
+d   6.0    7.0         8.0
+   Texas  Utah  California
+a      1   NaN           2
+c      4   NaN           5
+d      7   NaN           8
+    \end{Verbatim}
+
+    reindex方法的参数： -
+index：新建作为索引的序列，可以是索引实例或任意其他序列型python数据结构，索引使用时无需复制
+- method：插值方式：'ffill'为前向填充，'bfill'是后向填充 -
+fill\_value：通过重新索引引入缺失数据时使用的替代值 -
+limit：当前向或后向填充时，所需填充的最大尺寸间隙（以元素数量） -
+tolerance：当前向或后向填充时，所需填充的不精确匹配下的最大尺寸间隙（以绝对数字距离）
+- level：匹配MultiIndex级别的简单索引，否则选择子集 -
+copy：如果为True，即使新索引等于旧索引，也总是复制底层数据，如果时False，则在索引相同时不要复制数据
+
+    \hypertarget{ux8f74ux5411ux4e0aux5220ux9664ux6761ux76ee}{%
+\subsubsection{轴向上删除条目}\label{ux8f74ux5411ux4e0aux5220ux9664ux6761ux76ee}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{292}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{5.}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{e}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n}{new\PYZus{}obj} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{}删除指定索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{new\PYZus{}obj}\PY{p}{)}
+\PY{n}{obj}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}删除多个索引}
+
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+					\PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colorado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New York}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+					\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{four}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\PY{n}{data2} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colorado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}删除指定行}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}删除指定列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{four}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}删除多列}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a    0.0
+b    1.0
+c    2.0
+d    3.0
+e    4.0
+dtype: float64
+a    0.0
+b    1.0
+d    3.0
+e    4.0
+dtype: float64
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+Utah        8    9     10    11
+New York   12   13     14    15
+          one  two  three  four
+Utah        8    9     10    11
+New York   12   13     14    15
+          one  three  four
+Ohio        0      2     3
+Colorado    4      6     7
+Utah        8     10    11
+New York   12     14    15
+          one  three
+Ohio        0      2
+Colorado    4      6
+Utah        8     10
+New York   12     14
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{293}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{}直接在obj上删除，不返回新对象}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a    0.0
+b    1.0
+d    3.0
+e    4.0
+dtype: float64
+    \end{Verbatim}
+
+    \hypertarget{ux7d22ux5f15ux9009ux62e9ux548cux4e0eux8fc7ux6ee4}{%
+\subsubsection{索引、选择和与过滤}\label{ux7d22ux5f15ux9009ux62e9ux548cux4e0eux8fc7ux6ee4}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{294}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{4.}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过索引取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过位置取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}切片取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过索引列表取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过位置列表取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{n}{obj} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}布尔型索引取值}
+\PY{n}{obj}\PY{p}{[}\PY{n}{obj} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}布尔型索引赋值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a    0.0
+b    1.0
+c    2.0
+d    3.0
+dtype: float64
+1.0
+1.0
+c    2.0
+d    3.0
+dtype: float64
+b    1.0
+a    0.0
+d    3.0
+dtype: float64
+b    1.0
+d    3.0
+dtype: float64
+a    0.0
+b    1.0
+dtype: float64
+a    0.0
+b    0.0
+c    2.0
+d    3.0
+dtype: float64
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/tmp/ipykernel\_6887/2710548481.py:4: FutureWarning: Series.\_\_getitem\_\_ treating
+keys as positions is deprecated. In a future version, integer keys will always
+be treated as labels (consistent with DataFrame behavior). To access a value by
+position, use `ser.iloc[pos]`
+  print(obj[1]) \#通过位置取值
+/tmp/ipykernel\_6887/2710548481.py:7: FutureWarning: Series.\_\_getitem\_\_ treating
+keys as positions is deprecated. In a future version, integer keys will always
+be treated as labels (consistent with DataFrame behavior). To access a value by
+position, use `ser.iloc[pos]`
+  print(obj[[1, 3]]) \#通过位置列表取值
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{295}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+					\PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colorado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New York}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+					\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{four}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}取列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}取多列}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}切片取行}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+Utah        8    9     10    11
+New York   12   13     14    15
+Ohio         1
+Colorado     5
+Utah         9
+New York    13
+Name: two, dtype: int64
+          three  one
+Ohio          2    0
+Colorado      6    4
+Utah         10    8
+New York     14   12
+          one  two  three  four
+Ohio        0    1      2     3
+Colorado    4    5      6     7
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{296}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}布尔型索引取行}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{)} \PY{c+c1}{\PYZsh{}产生布尔型DataFrame}
+\PY{n}{data}\PY{p}{[}\PY{n}{data} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{}通过布尔型DataFrame赋值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          one  two  three  four
+Colorado    4    5      6     7
+Utah        8    9     10    11
+New York   12   13     14    15
+            one    two  three   four
+Ohio       True   True   True   True
+Colorado   True  False  False  False
+Utah      False  False  False  False
+New York  False  False  False  False
+          one  two  three  four
+Ohio        0    0      0     0
+Colorado    0    5      6     7
+Utah        8    9     10    11
+New York   12   13     14    15
+    \end{Verbatim}
+
+    使用loc和iloc选择数据
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{ }{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Colorado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过标签取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过位置取值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过位置取整行}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+two      5
+three    6
+Name: Colorado, dtype: int64
+four    11
+one      8
+two      9
+Name: Utah, dtype: int64
+one       8
+two       9
+three    10
+four     11
+Name: Utah, dtype: int64
+    \end{Verbatim}
+
+    \hypertarget{ux7b97ux672fux548cux6570ux636eux5bf9ux9f50}{%
+\subsubsection{算术和数据对齐}\label{ux7b97ux672fux548cux6570ux636eux5bf9ux9f50}}
+
+    两个不同的索引化对象进行算术时结果对齐数据会产生缺失值
+
+    使用特殊值填充：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{298}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{12.}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abcd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{20.}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abcde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\PY{n}{df2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     a    b     c     d
+0  0.0  1.0   2.0   3.0
+1  4.0  5.0   6.0   7.0
+2  8.0  9.0  10.0  11.0
+      a     b     c     d     e
+0   0.0   1.0   2.0   3.0   4.0
+1   5.0   NaN   7.0   8.0   9.0
+2  10.0  11.0  12.0  13.0  14.0
+3  15.0  16.0  17.0  18.0  19.0
+    \end{Verbatim}
+
+    直接相加：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{299}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df1} \PY{o}{+} \PY{n}{df2}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      a     b     c     d   e
+0   0.0   2.0   4.0   6.0 NaN
+1   9.0   NaN  13.0  15.0 NaN
+2  18.0  20.0  22.0  24.0 NaN
+3   NaN   NaN   NaN   NaN NaN
+    \end{Verbatim}
+
+    用add方法：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{300}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{df2}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+      a     b     c     d     e
+0   0.0   2.0   4.0   6.0   4.0
+1   9.0   5.0  13.0  15.0   9.0
+2  18.0  20.0  22.0  24.0  14.0
+3  15.0  16.0  17.0  18.0  19.0
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{301}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{df1}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{rdiv}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+       a         b         c         d
+0    inf  1.000000  0.500000  0.333333
+1  0.250  0.200000  0.166667  0.142857
+2  0.125  0.111111  0.100000  0.090909
+       a         b         c         d
+0    inf  1.000000  0.500000  0.333333
+1  0.250  0.200000  0.166667  0.142857
+2  0.125  0.111111  0.100000  0.090909
+    \end{Verbatim}
+
+    reindex也有类似的：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{302}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{o}{.}\PY{n}{reindex}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{df2}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{fill\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     a    b     c     d  e
+0  0.0  1.0   2.0   3.0  0
+1  4.0  5.0   6.0   7.0  0
+2  8.0  9.0  10.0  11.0  0
+    \end{Verbatim}
+
+    算术方法有： - add, radd：加法 - sub, rsub：减法 - div, rdiv：除法 -
+floordiv, rfloordiv：整除 - mul, rmul：乘法 - pow, rpow：幂次方
+
+    广播机制：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{303}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{12.}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{arr}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{arr} \PY{o}{\PYZhy{}} \PY{n}{arr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}进行减法时在每一行都进行了操作}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.  1.  2.  3.]
+ [ 4.  5.  6.  7.]
+ [ 8.  9. 10. 11.]]
+[0. 1. 2. 3.]
+[[0. 0. 0. 0.]
+ [4. 4. 4. 4.]
+ [8. 8. 8. 8.]]
+    \end{Verbatim}
+
+    在DataFrame和Series间进行操作：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{304}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{12.}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oregon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{series} \PY{o}{=} \PY{n}{frame}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{series}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{\PYZhy{}}\PY{n}{series}\PY{p}{)} \PY{c+c1}{\PYZsh{}将Series的索引和DataFrame的列进行匹配并广播到各行}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          b     d     e
+Utah    0.0   1.0   2.0
+Ohio    3.0   4.0   5.0
+Texa    6.0   7.0   8.0
+Oregon  9.0  10.0  11.0
+b    0.0
+d    1.0
+e    2.0
+Name: Utah, dtype: float64
+          b    d    e
+Utah    0.0  0.0  0.0
+Ohio    3.0  3.0  3.0
+Texa    6.0  6.0  6.0
+Oregon  9.0  9.0  9.0
+    \end{Verbatim}
+
+    在列上广播：
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{305}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{series2} \PY{o}{=} \PY{n}{frame}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{series2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{n}{series2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          b     d     e
+Utah    0.0   1.0   2.0
+Ohio    3.0   4.0   5.0
+Texa    6.0   7.0   8.0
+Oregon  9.0  10.0  11.0
+Utah       1.0
+Ohio       4.0
+Texa       7.0
+Oregon    10.0
+Name: d, dtype: float64
+          b    d    e
+Utah   -1.0  0.0  1.0
+Ohio   -1.0  0.0  1.0
+Texa   -1.0  0.0  1.0
+Oregon -1.0  0.0  1.0
+    \end{Verbatim}
+
+    \hypertarget{ux51fdux6570ux5e94ux7528ux4e0eux6620ux5c04}{%
+\subsubsection{函数应用与映射}\label{ux51fdux6570ux5e94ux7528ux4e0eux6620ux5c04}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{306}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oregon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{frame}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}numpy的绝对值函数}
+\PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}自定义函数}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列应用函数}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按行应用函数}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               b         d         e
+Utah   -0.171523 -0.750481  1.880434
+Ohio   -1.053568 -0.826458 -1.497577
+Texa    0.988448  0.703451  0.974423
+Oregon -0.242716 -0.754870  1.500686
+               b         d         e
+Utah    0.171523  0.750481  1.880434
+Ohio    1.053568  0.826458  1.497577
+Texa    0.988448  0.703451  0.974423
+Oregon  0.242716  0.754870  1.500686
+b    2.042016
+d    1.529909
+e    3.378011
+dtype: float64
+Utah      2.630915
+Ohio      0.671119
+Texa      0.284998
+Oregon    2.255555
+dtype: float64
+    \end{Verbatim}
+
+    \hypertarget{ux6392ux5e8fux548cux6392ux540d}{%
+\subsubsection{排序和排名}\label{ux6392ux5e8fux548cux6392ux540d}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{307}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{object} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{object}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按索引排序}
+
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按行索引排序}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列索引排序}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列索引降序排序}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d    0
+a    1
+b    2
+c    3
+dtype: int64
+a    1
+b    2
+c    3
+d    0
+dtype: int64
+       d  a  b  c
+three  0  1  2  3
+one    4  5  6  7
+       d  a  b  c
+one    4  5  6  7
+three  0  1  2  3
+       a  b  c  d
+three  1  2  3  0
+one    5  6  7  4
+       d  c  b  a
+three  0  3  2  1
+one    4  7  6  5
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{308}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按值排序}
+
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按值排序，NaN放在最后}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0    4
+1    7
+2   -3
+3    2
+dtype: int64
+2   -3
+3    2
+0    4
+1    7
+dtype: int64
+0    4.0
+1    NaN
+2    7.0
+3    NaN
+4   -3.0
+5    2.0
+dtype: float64
+4   -3.0
+5    2.0
+0    4.0
+2    7.0
+1    NaN
+3    NaN
+dtype: float64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{309}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按单列排序}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按多列排序，先按a列，再按b列}
+
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}默认平均排名}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按出现顺序排名}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}降序，最大排名}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   b  a
+0  4  0
+1  7  1
+2 -3  0
+3  2  1
+   b  a
+2 -3  0
+3  2  1
+0  4  0
+1  7  1
+   b  a
+2 -3  0
+0  4  0
+3  2  1
+1  7  1
+0    7
+1   -5
+2    7
+3    4
+4    2
+5    0
+6    4
+dtype: int64
+0    6.5
+1    1.0
+2    6.5
+3    4.5
+4    3.0
+5    2.0
+6    4.5
+dtype: float64
+0    6.0
+1    1.0
+2    7.0
+3    4.0
+4    3.0
+5    2.0
+6    5.0
+dtype: float64
+0    2.0
+1    7.0
+2    2.0
+3    4.0
+4    5.0
+5    6.0
+6    4.0
+dtype: float64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{310}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{4.3}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.5}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按行排名}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列排名}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     b  a    c
+0  4.3  0 -2.0
+1  7.0  1  5.0
+2 -3.0  0  8.0
+3  2.0  1 -2.5
+     b    a    c
+0  3.0  2.0  1.0
+1  3.0  1.0  2.0
+2  1.0  2.0  3.0
+3  3.0  2.0  1.0
+     b    a    c
+0  3.0  2.0  2.0
+1  4.0  4.0  3.0
+2  1.0  2.0  4.0
+3  2.0  4.0  1.0
+    \end{Verbatim}
+
+    \hypertarget{ux542bux6709ux91cdux590dux6807ux7b7eux7684ux8f74ux7d22ux5f15}{%
+\subsubsection{含有重复标签的轴索引}\label{ux542bux6709ux91cdux590dux6807ux7b7eux7684ux8f74ux7d22ux5f15}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{311}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{is\PYZus{}unique}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引是否唯一}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引重复时返回Series}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引唯一时返回标量}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a    0
+a    1
+b    2
+b    3
+c    4
+dtype: int64
+False
+a    0
+a    1
+dtype: int64
+4
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{312}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引重复时返回DataFrame}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}索引重复时返回DataFrame}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+          0         1         2
+a  1.574966 -0.564201 -0.731516
+a  0.622392 -0.439082 -0.118496
+b -0.152188  0.583649 -1.964059
+b  0.277674  0.487701 -1.008114
+          0         1         2
+b -0.152188  0.583649 -1.964059
+b  0.277674  0.487701 -1.008114
+          0         1         2
+a  1.574966 -0.564201 -0.731516
+a  0.622392 -0.439082 -0.118496
+    \end{Verbatim}
+
+    \hypertarget{ux63cfux8ff0ux6027ux7edfux8ba1ux7684ux6982ux8ff0ux4e0eux8ba1ux7b97}{%
+\subsection{描述性统计的概述与计算}\label{ux63cfux8ff0ux6027ux7edfux8ba1ux7684ux6982ux8ff0ux4e0eux8ba1ux7b97}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{313}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{7.1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.5}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.3}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+				  \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+				  \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列计算和，默认axis=0}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按行计算和}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{skipna}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按行计算均值，skipna=False时有NaN则结果为NaN}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+    one  two
+a  1.40  NaN
+b  7.10 -4.5
+c   NaN  NaN
+d  0.75 -1.3
+one    9.25
+two   -5.80
+dtype: float64
+a    1.40
+b    2.60
+c    0.00
+d   -0.55
+dtype: float64
+a      NaN
+b    1.300
+c      NaN
+d   -0.275
+dtype: float64
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{314}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列计算最大值的索引}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}按列计算累计和}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+one    b
+two    d
+dtype: object
+    one  two
+a  1.40  NaN
+b  8.50 -4.5
+c   NaN  NaN
+d  9.25 -5.8
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{315}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算描述性统计}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}转置后计算描述性统计}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+            one       two
+count  3.000000  2.000000
+mean   3.083333 -2.900000
+std    3.493685  2.262742
+min    0.750000 -4.500000
+25\%    1.075000 -3.700000
+50\%    1.400000 -2.900000
+75\%    4.250000 -2.100000
+max    7.100000 -1.300000
+         a         b    c         d
+count  1.0  2.000000  0.0  2.000000
+mean   1.4  1.300000  NaN -0.275000
+std    NaN  8.202439  NaN  1.449569
+min    1.4 -4.500000  NaN -1.300000
+25\%    1.4 -1.600000  NaN -0.787500
+50\%    1.4  1.300000  NaN -0.275000
+75\%    1.4  4.200000  NaN  0.237500
+max    1.4  7.100000  NaN  0.750000
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{316}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{4}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算描述性统计，非数值型数据}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0     a
+1     a
+2     b
+3     c
+4     a
+5     a
+6     b
+7     c
+8     a
+9     a
+10    b
+11    c
+12    a
+13    a
+14    b
+15    c
+dtype: object
+count     16
+unique     3
+top        a
+freq       8
+dtype: object
+    \end{Verbatim}
+
+    \hypertarget{ux76f8ux5173ux6027ux4e0eux534fux65b9ux5dee}{%
+\subsubsection{相关性与协方差}\label{ux76f8ux5173ux6027ux4e0eux534fux65b9ux5dee}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{317}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{frame} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Utah}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ohio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oregon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算列间相关系数}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{frame}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算列间协方差}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               b         d         e
+Utah    0.569030  1.224514  1.992728
+Ohio   -0.865025 -0.103354  1.195028
+Texa   -0.058713 -0.786837  0.709671
+Oregon -1.099544 -1.762042  0.203053
+          b         d         e
+b  1.000000  0.781481  0.758563
+d  0.781481  1.000000  0.998783
+e  0.758563  0.998783  1.000000
+          b         d         e
+b  0.585265  0.750254  0.442014
+d  0.750254  1.574809  0.954671
+e  0.442014  0.954671  0.580145
+    \end{Verbatim}
+
+    \hypertarget{ux552fux4e00ux503cux8ba1ux6570ux548cux6210ux5458ux5c5eux6027}{%
+\subsubsection{唯一值、计数和成员属性}\label{ux552fux4e00ux503cux8ba1ux6570ux548cux6210ux5458ux5c5eux6027}}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{318}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{obj} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{uniques} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}唯一值}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{uniques}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计数}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{obj}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{sort}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}计数，sort=False时不排序}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['c' 'a' 'd' 'b']
+c    4
+a    3
+b    2
+d    1
+Name: count, dtype: int64
+c    4
+a    3
+d    1
+b    2
+Name: count, dtype: int64
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/tmp/ipykernel\_6887/2678439928.py:5: FutureWarning: pandas.value\_counts is
+deprecated and will be removed in a future version. Use
+pd.Series(obj).value\_counts() instead.
+  print(pd.value\_counts(obj.values, sort=False)) \#计数，sort=False时不排序
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{319}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{mask} \PY{o}{=} \PY{n}{obj}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}成员属性}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{obj}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}通过成员属性取值}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0     True
+1    False
+2    False
+3    False
+4    False
+5     True
+6     True
+7     True
+8     True
+9     True
+dtype: bool
+0    c
+5    b
+6    b
+7    c
+8    c
+9    c
+dtype: object
+    \end{Verbatim}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{320}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{to\PYZus{}match} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n}{unique\PYZus{}vals} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Index}\PY{p}{(}\PY{n}{unique\PYZus{}vals}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}indexer}\PY{p}{(}\PY{n}{to\PYZus{}match}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}返回to\PYZus{}match中每个值在unique\PYZus{}vals中的位置，没有则为\PYZhy{}1}
+
+\PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qu1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+					 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qu2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+					 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qu3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\PY{n}{result} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{}计算每列中各值的出现次数，缺失值填充0}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0 2 1 1 0 2]
+   Qu1  Qu2  Qu3
+0    1    2    1
+1    3    3    5
+2    4    1    2
+3    3    2    4
+4    4    3    4
+   Qu1  Qu2  Qu3
+1  1.0  1.0  1.0
+2  0.0  2.0  1.0
+3  2.0  2.0  0.0
+4  2.0  0.0  2.0
+5  0.0  0.0  1.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/tmp/ipykernel\_6887/3531663070.py:9: FutureWarning: pandas.value\_counts is
+deprecated and will be removed in a future version. Use
+pd.Series(obj).value\_counts() instead.
+  result = data.apply(pd.value\_counts).fillna(0) \#计算每列中各值的出现次数，缺失值填充0
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}

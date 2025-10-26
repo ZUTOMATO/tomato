@@ -1,0 +1,66 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{titlesec}
+\usepackage{ctex}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{multicol} 
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+
+\renewenvironment{abstract}{%
+    \noindent{\heiti\zihao{5} 摘\hspace{1em}要}%
+    \small                              
+    \vspace{0.5em}                      
+    \noindent\ignorespaces               
+}{}
+
+\newenvironment{keywords}{%
+    \noindent{\heiti\zihao{5} 关键词}%
+    \small
+    \vspace{0.5em}
+    \noindent\ignorespaces
+}{}
+
+\renewcommand{\normalsize}{\fontsize{9pt}{10.8pt}\selectfont}
+\titleformat{\section}{\heiti\Large}{\thesection}{1em}{}
+\titleformat{\subsection}{\heiti\normalsize}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\kaishu\small}{\thesubsubsection}{1em}{}
+
+% 设置页眉和页脚
+\pagestyle{fancy}
+\fancyhf{} % 清除所有页眉和页脚
+\lhead{不确定性量化导论} % 右上角小字
+\renewcommand{\headrulewidth}{0.5pt} % 设置分割线宽度
+
+
+\title{\LARGE 不确定性量化导论}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section{数值差商}
+对于微分方程$\begin{cases}
+\frac{dy}{dx}=f(x,y)  \\
+y(a) = y_0
+\end{cases}$
+向前差商$\frac{y(x_{n+1}-y(x_{n}))}{\Delta x}\approx y'(x_n)$ 
+\section{Runge-Kutta方法（泰勒展开）}
+$y'(x)=f(x,y), \quad y''(x)=f_x(x,y)+f_y(x,y)f(x,y),\cdots$
+截断$T=O(\Delta x^{p})$，带入可得
+$$y^{n+1} = y^{n}+\cdots $$
+如
+\begin{itemize}
+	\item $p=1,\quad y^{n+1}=y^{n}+\Delta x f(x_n,y^{n})$即为欧拉方法;
+	\item $p=2,\quad y^{n+1}=y^{n}+\Delta x f(x_n,y^{n})+\frac{\Delta x^{2}}{2}\left[f_x(x,y)+f_y(x,y)f(x,y)\right]$
+\end{itemize}
+\subsection{3阶Strong Stability Preserving方法}
+\section{PDE的有限差分方法}
+$$u_t(x,t)=au_x(x,t),\quad x\in [0, 2\pi]
+$$$$
+u(x,0)=f(x)$$边界是周期的：$$
+\frac{d^{p}f}{dx^{p}}(0)=\frac{d^{p}f}{dx^{p}}(2\pi)$$
+\end{document}
